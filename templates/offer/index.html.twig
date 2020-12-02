@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer index{% endblock %}
+
+{% block body %}
+    <h1 id="test">Offer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Destination</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.id }}</td>
+                <td>{{ offer.destination }}</td>
+                <td>{{ offer.departure ? offer.departure|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.arrival ? offer.arrival|date('Y-m-d') : '' }}</td>
+                <td>{{ offer.price }}</td>
+                <td>
+                    <a href="{{ path('offer_show', {'id': offer.id}) }}">show</a>
+                    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% for offer in offers %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ offer.destination }}</h5>
+        <p class="card-text">{{ offer.id }}</p>
+        <p class="card-text">{{ offer.price }}</p>
+        <p class="card-text">{{ offer.departure|date('Y/m/d') }}</p>
+        <p class="card-text">{{ offer.arrival|date('Y/m/d') }}</p>
+
+        <a href="{{ path('offer_show', {'id': offer.id}) }}" class="btn btn-primary">show</a>
+        <a href="{{ path('offer_edit', {'id': offer.id}) }}" class="btn btn-primary">edit</a>
+
+    </div>
+</div>
+{% else %}
+<div>No records found<div>
+{% endfor %}
+
+
+    <a href="{{ path('offer_new') }}">Create new</a>
+{% endblock %}

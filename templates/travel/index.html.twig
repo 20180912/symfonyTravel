@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travel{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="text-primary">Travel with us</h1>
+
+		{% for offer in  offers  %}
+               <div class="card" style="width: 18rem;">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ offer.destination }}</h5>
+				    <p class="card-text">{{ offer.price }}</p>
+				    <p class="card-text">{{ offer.departure|date('Y/m/d') }}</p>
+				    <p class="card-text">{{ offer.arrival|date('Y/m/d') }}</p>
+				    <a href="/detail/{{offer.id}}" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>
+        {% endfor %}
+
+
+	</div>
+
+
+{% endblock %}
